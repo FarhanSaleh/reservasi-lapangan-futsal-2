@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jadwal', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lapangan_id')->constrained()->onDelete('cascade');
-            $table->date('tanggal');
-            $table->time('jam_mulai');
-            $table->time('jam_selesai');
-            $table->enum('status', ['tersedia', 'dipesan'])->default('tersedia');
+            $table->date('date');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->enum('status', ['available', 'unavailable'])->default('available');
             $table->timestamps();
+            $table->foreignId('field_id')->constrained('fields');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jadwal');
+        Schema::dropIfExists('schedules');
     }
 };

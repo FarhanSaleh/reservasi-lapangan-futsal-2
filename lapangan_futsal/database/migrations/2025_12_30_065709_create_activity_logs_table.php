@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('log_activities', function (Blueprint $table) {
+        Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('aksi');
-            $table->text('deskripsi')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade'); // Siapa pelakunya
+            $table->string('action'); // create, update, delete, login, dll
+            $table->text('description')->nullable(); // Detail aktivitas
             $table->string('ip_address')->nullable();
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
-
     }
 
     /**
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('log_activities');
+        Schema::dropIfExists('activity_logs');
     }
 };
