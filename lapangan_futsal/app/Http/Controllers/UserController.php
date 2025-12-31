@@ -46,6 +46,7 @@ class UserController extends Controller
             'password' => '112233',
             'role_id' => $validated['role_id']
         ]);
+        catat_log('create', 'Membuat user baru');
 
         return redirect('/users'); // arahkan ke halaman data user
     }
@@ -81,6 +82,8 @@ class UserController extends Controller
             'role_id' => $validated['role_id']
         ]);
 
+        catat_log('update', 'Mengubah data user');
+
         return redirect('/users'); // arahkan ke halaman data user
     }
 
@@ -94,6 +97,8 @@ class UserController extends Controller
 
         try {
             $user->delete();
+
+            catat_log('delete', 'Menghapus data user');
 
             return redirect('/users')->with('success', 'Data berhasil dihapus'); // arahkan ke halaman data user
         } catch (QueryException $e) {
@@ -146,6 +151,8 @@ class UserController extends Controller
         }
 
         $user->save();
+
+        catat_log('update', 'Mengubah data profil');
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui'); // arahkan kembali ke halaman profil
     }
