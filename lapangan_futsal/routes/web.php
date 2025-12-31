@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FieldController;
+use App\Http\Controllers\ScheduleController;
 use App\Models\User;
 use App\Http\Controllers\UserController;
 
@@ -34,5 +35,12 @@ Route::middleware("auth")->group(function () {
     Route::get('/fields/{id}/edit', [FieldController::class, 'edit']);
     Route::put('/fields/{id}', [FieldController::class, 'update']);
     Route::delete('/fields/{id}', [FieldController::class, 'destroy']);
+
+    Route::get('/schedules', [ScheduleController::class, 'index']);
+    Route::get('/schedules/create', [ScheduleController::class, 'create']);
+    Route::post('/schedules', [ScheduleController::class, 'store']);
+    Route::get('/schedules/{id}/edit', [ScheduleController::class, 'edit']);
+    Route::put('/schedules/{id}', [ScheduleController::class, 'update']);
+    Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy']);
 });
 
