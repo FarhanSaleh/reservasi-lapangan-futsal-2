@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+<x-base-layout>
     <h1 class="text-2xl">Jadwal</h1>
     @session('success')
     <div class="text-green-500">
@@ -52,6 +41,12 @@
                         @method("DELETE")
                         <button type="submit" class="border">Delete</button>
                     </form>
+                    <form action="/reservations" method="POST" class="inline">
+                        @csrf
+                        @method("POST")
+                        <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
+                        <button type="submit" class="border">Pesan</button>
+                    </form>
                 </td>
             </tr>
             @empty
@@ -61,6 +56,4 @@
             @endforelse
         </tbody>
     </table>
-</body>
-
-</html>
+</x-base-layout>

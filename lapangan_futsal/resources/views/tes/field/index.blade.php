@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+<x-base-layout>
     <h1 class="text-2xl">Lapangan</h1>
     @session('success')
     <div class="text-green-500">
@@ -28,7 +17,6 @@
                 <th class="border">Name</th>
                 <th class="border">Type</th>
                 <th class="border">Price Per Hour</th>
-                <th class="border">Status</th>
                 <th class="border">Action</th>
             </tr>
         </thead>
@@ -38,7 +26,6 @@
                 <td class="border p-2">{{ $field->name }}</td>
                 <td class="border p-2">{{ $field->type }}</td>
                 <td class="border p-2">{{ $field->price_per_hour }}</td>
-                <td class="border p-2">{{ $field->status }}</td>
                 <td class="border p-2">
                     <a href="/fields/{{ $field->id }}/edit" class="border">Edit</a>
                     <form action="/fields/{{ $field->id }}" method="POST" class="inline">
@@ -50,11 +37,9 @@
             </tr>
             @empty
             <tr>
-                <td colspan="5">No data</td>
+                <td colspan="4">No data</td>
             </tr>
             @endforelse
         </tbody>
     </table>
-</body>
-
-</html>
+</x-base-layout>

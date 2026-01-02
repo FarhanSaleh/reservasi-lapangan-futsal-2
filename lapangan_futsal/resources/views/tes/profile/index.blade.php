@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+<x-base-layout>
     @if (session('error'))
     <p class="text-red-500">{{ session('error') }}</p>
     @endif
     <h1 class="text-2xl">Profile</h1>
+    <h1 class="text-xl">Role: {{ $user->role->name }}</h1>
     <form action="/profile" method="POST">
         @csrf
         @method("PUT")
@@ -59,6 +49,4 @@
             <button type="submit" class="border">Save</button>
         </div>
     </form>
-</body>
-
-</html>
+</x-base-layout>

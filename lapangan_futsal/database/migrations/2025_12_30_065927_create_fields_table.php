@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('type', ['vinyl', 'sintetik']);
             $table->integer('price_per_hour');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            // $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

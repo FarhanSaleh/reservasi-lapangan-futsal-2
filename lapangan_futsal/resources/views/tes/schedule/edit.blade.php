@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+<x-base-layout>
     <h1 class="text-2xl">Jadwal</h1>
     <form action="/schedules/{{ $schedule->id }}" method="POST">
         @csrf
@@ -61,6 +50,4 @@
             <button type="submit" class="border">Save</button>
         </div>
     </form>
-</body>
-
-</html>
+</x-base-layout>

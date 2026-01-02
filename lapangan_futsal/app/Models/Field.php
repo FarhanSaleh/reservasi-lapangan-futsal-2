@@ -10,7 +10,6 @@ class Field extends Model
         'name',
         'type',
         'price_per_hour',
-        'status'
     ];
 
     public function schedules()
