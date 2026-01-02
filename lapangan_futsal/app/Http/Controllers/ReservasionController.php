@@ -45,12 +45,20 @@ class ReservasionController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
+        $schedule = Schedule::findOrFail($request->schedule_id);
+
+        if ($schedule->status == 'unavailable') {
+            return redirect()->back()->with('error', 'Lapangan sudah tidak tersedia');
+        }
+
         Reservation::create([
             'reservation_date' => now(),
             'user_id' => Auth::id(),
             'schedule_id' => $request->schedule_id,
         ]);
-        Schedule::where('id', $request->schedule_id)->update([
+
+        $schedule->update([
             'status' => 'unavailable',
         ]);
 

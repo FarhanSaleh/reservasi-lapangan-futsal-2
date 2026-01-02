@@ -26,7 +26,7 @@ Route::middleware("auth")->group(function () {
 
     Route::get('/fields', [FieldController::class, 'index']);
     Route::get('/schedules', [ScheduleController::class, 'index']);
-    
+
     Route::middleware('role:admin')->group(function () {
         Route::get('/users', [UserController::class, 'index']);
         Route::get('/users/create', [UserController::class, 'create']);
@@ -36,7 +36,7 @@ Route::middleware("auth")->group(function () {
         Route::delete('/users/{id}', [UserController::class, 'destroy']);
     });
 
-    Route::middleware('role:admin,petugas')->group(function () {
+    Route::middleware('role:admin,pengelola')->group(function () {
         Route::get('/reservations', [ReservasionController::class, 'index']);
 
         Route::get('/fields/create', [FieldController::class, 'create']);
@@ -50,13 +50,13 @@ Route::middleware("auth")->group(function () {
         Route::get('/schedules/{id}/edit', [ScheduleController::class, 'edit']);
         Route::put('/schedules/{id}', [ScheduleController::class, 'update']);
         Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy']);
+
+        Route::put('/reservations/{id}', [ReservasionController::class, 'update']);
     });
 
     Route::middleware('role:user')->group(function () {
         Route::get('/reservations/my', [ReservasionController::class, 'findByUser']);
         Route::post('/reservations', [ReservasionController::class, 'store']);
-        Route::get('/reservations/{id}', [ReservasionController::class, 'show']);
-        Route::put('/reservations/{id}', [ReservasionController::class, 'update']);
         Route::delete('/reservations/{id}', [ReservasionController::class, 'destroy']);
     });
 });
