@@ -136,11 +136,15 @@ class ReservasionController extends Controller
     public function destroy(string $id)
     {
         $reservation = Reservation::findOrFail($id);
+        // $reservation->delete();
+        // catat_log('delete', 'Menghapus reservasi');
+        $reservation->update([
+            'status' => 'canceled',
+        ]);
         Schedule::where('id', $reservation->schedule_id)->update([
             'status' => 'available',
         ]);
-        $reservation->delete();
-        catat_log('delete', 'Menghapus reservasi');
+        catat_log('update', 'Membatalkan reservasi');
         return redirect('/reservations/my');
     }
 }

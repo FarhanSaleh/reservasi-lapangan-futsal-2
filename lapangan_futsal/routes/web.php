@@ -58,9 +58,10 @@ Route::middleware("auth")->group(function () {
     Route::middleware('role:user')->group(function () {
         Route::get('/reservations/my', [ReservasionController::class, 'findByUser']);
         Route::post('/reservations', [ReservasionController::class, 'store']);
-        Route::get('/reservations/{id}', [ReservasionController::class, 'show']);
         Route::delete('/reservations/{id}', [ReservasionController::class, 'destroy']);
 
         Route::post('/reservations/{id}/payments', [PaymentController::class, 'store']);
     });
+
+    Route::get('/reservations/{id}', [ReservasionController::class, 'show']);
 });

@@ -87,6 +87,7 @@
     </div>
     @endif
     <br>
+    @if ($reservation->status == 'pending')
     @if (!$latestPayment || $latestPayment->status == 'failed')
     <div>
         <h2 class="text-2xl">Lanjutkan Pembayaran</h2>
@@ -120,5 +121,6 @@
             <button type="submit" class="border">Bayar</button>
         </form>
     </div>
+    @endif
     @endif
 </x-base-layout>

@@ -35,12 +35,14 @@
                 <td class="border p-2">{{ $reservation->schedule->start_time }}</td>
                 <td class="border p-2">{{ $reservation->schedule->end_time }}</td>
                 <td class="border p-2">
+                    @if ($reservation->status == 'pending')
                     <form action="/reservations/{{ $reservation->id }}" method="POST" class="inline">
                         @csrf
                         @method("DELETE")
                         <button type="submit" class="border">Batal</button>
                     </form>
-                    <a href="/reservations/{{ $reservation->id }}" class="border">Detail/Bayar</a>
+                    @endif
+                    <a href="/reservations/{{ $reservation->id }}" class="border">Detail</a>
                 </td>
             </tr>
             @empty
