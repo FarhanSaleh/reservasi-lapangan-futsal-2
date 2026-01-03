@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FieldController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReservasionController;
 use App\Http\Controllers\ScheduleController;
 use App\Models\User;
@@ -57,6 +58,9 @@ Route::middleware("auth")->group(function () {
     Route::middleware('role:user')->group(function () {
         Route::get('/reservations/my', [ReservasionController::class, 'findByUser']);
         Route::post('/reservations', [ReservasionController::class, 'store']);
+        Route::get('/reservations/{id}', [ReservasionController::class, 'show']);
         Route::delete('/reservations/{id}', [ReservasionController::class, 'destroy']);
+
+        Route::post('/reservations/{id}/payments', [PaymentController::class, 'store']);
     });
 });

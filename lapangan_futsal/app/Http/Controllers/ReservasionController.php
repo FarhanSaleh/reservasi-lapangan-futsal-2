@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Number;
 
 class ReservasionController extends Controller
 {
@@ -72,7 +75,31 @@ class ReservasionController extends Controller
     public function show(string $id)
     {
         $reservation = Reservation::with('user', 'schedule.field')->find($id);
-        return view('tes.reservasion.show', ['reservation' => $reservation]);
+
+        $startTime = Carbon::parse($reservation->schedule->start_time);
+        $endTime = Carbon::parse($reservation->schedule->end_time);
+        $totalDuration = $startTime->diffInHours($endTime);
+
+        $pricePerHour = Number::currency($reservation->schedule->field->price_per_hour, in: 'IDR',  locale: 'id-ID');
+
+        $totalPrice = Number::currency($totalDuration * $reservation->schedule->field->price_per_hour, in: 'IDR',  locale: 'id-ID');
+        $totalPriceNum = $totalDuration * $reservation->schedule->field->price_per_hour;
+
+        $paymentMethod = (new PaymentController())->getPaymentMethod();
+
+        $payment = Payment::where('reservation_id', $id)->orderBy('payment_date', 'asc')->get();
+        $latestPayment = Payment::where('reservation_id', $id)->orderBy('payment_date', 'desc')->first();
+
+        return view('tes.reservasion.show', [
+            'reservation' => $reservation,
+            'totalDuration' => $totalDuration,
+            'pricePerHour' => $pricePerHour,
+            'totalPrice' => $totalPrice,
+            'paymentMethod' => $paymentMethod,
+            'totalPriceNum' => $totalPriceNum,
+            'payment' => $payment,
+            'latestPayment' => $latestPayment,
+        ]);
     }
 
     /**

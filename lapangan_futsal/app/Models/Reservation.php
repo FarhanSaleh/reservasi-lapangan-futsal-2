@@ -22,4 +22,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Schedule::class);
     }
+
+    public function payment()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

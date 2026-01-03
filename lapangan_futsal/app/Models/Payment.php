@@ -11,11 +11,12 @@ class Payment extends Model
         'payment_method',
         'amount',
         'payment_date',
+        'payment_proof',
         'status',
     ];
 
     public function reservation()
     {
-        return $this->belongsTo(Reservasion::class);
+        return $this->belongsTo(Reservation::class);
     }
 }

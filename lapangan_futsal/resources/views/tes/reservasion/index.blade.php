@@ -14,7 +14,7 @@
     <table class="table-auto">
         <thead>
             <tr>
-                <th class="border">Tanggal Pemesanan</th>
+                <th class="border">Tanggal Reservasi</th>
                 <th class="border">Status</th>
                 <th class="border">Customer</th>
                 <th class="border">Lapangan</th>
@@ -40,6 +40,7 @@
                         @method("DELETE")
                         <button type="submit" class="border">Batal</button>
                     </form>
+                    <a href="/reservations/{{ $reservation->id }}" class="border">Detail/Bayar</a>
                 </td>
             </tr>
             @empty
