@@ -8,7 +8,10 @@
     <p class="text-red-500">{{ session('error') }}</p>
     @endsession
     <h1 class="text-2xl">Profile</h1>
-    <h1 class="text-lg font-bold">Role: {{ $user->role->name }}</h1>
+    <div class="space-y-2">
+        <h2 class="text-lg font-bold">Role: {{ $user->role->name }}</h2>
+        <a href="/2fa/setup" class="btn btn-sm btn-outline btn-primary">Atur 2FA</a>
+    </div>
     <form action="/profile" method="POST" class="space-y-4">
         @csrf
         @method("PUT")
