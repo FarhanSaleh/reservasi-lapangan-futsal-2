@@ -36,10 +36,9 @@
                     <div class="text-xs self-center">
                         <form action="/logout" method="POST">
                             @csrf
-                            @method("DELETE")
-                            <button type="submit" class="btn btn-primary">Kembali ke Login</button>
+                            @method("POST")
+                            <button type="submit" class="cursor-pointer text-primary font-bold">Kembali ke Login</button>
                         </form>
-                        <a class="text-primary font-bold" href="/register">Daftar</a>
                     </div>
                 </div>
             </div>
