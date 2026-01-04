@@ -55,7 +55,7 @@ class ScheduleController extends Controller
             'field_id' => $request->field_id,
         ]);
         catat_log('create', 'Membuat jadwal baru');
-        return redirect('/schedules')->with('success', 'Schedule created successfully');
+        return redirect('/schedules')->with('success', 'Jadwal baru berhasil dibuat');
     }
 
     /**
@@ -101,7 +101,7 @@ class ScheduleController extends Controller
             'field_id' => $request->field_id,
         ]);
         catat_log('update', 'Mengubah jadwal');
-        return redirect('/schedules')->with('success', 'Schedule updated successfully');
+        return redirect('/schedules')->with('success', 'Jadwal berhasil diubah');
     }
 
     /**
@@ -112,6 +112,6 @@ class ScheduleController extends Controller
         $schedule = Schedule::findOrFail($id);
         $schedule->delete();
         catat_log('delete', 'Menghapus jadwal');
-        return redirect('/schedules');
+        return redirect('/schedules')->with('success', 'Jadwal berhasil dihapus');
     }
 }

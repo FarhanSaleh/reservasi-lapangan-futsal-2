@@ -48,7 +48,7 @@ class UserController extends Controller
         ]);
         catat_log('create', 'Membuat user baru');
 
-        return redirect('/users'); // arahkan ke halaman data user
+        return redirect('/users')->with("success", "User berhasil ditambahkan"); // arahkan ke halaman data user
     }
 
     public function edit($id)
@@ -84,7 +84,7 @@ class UserController extends Controller
 
         catat_log('update', 'Mengubah data user');
 
-        return redirect('/users'); // arahkan ke halaman data user
+        return redirect('/users')->with('success', 'Data berhasil diubah'); // arahkan ke halaman data user
     }
 
     public function destroy(string $id)

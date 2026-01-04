@@ -31,7 +31,9 @@
                 @forelse($reservations as $reservation)
                 <tr>
                     <td>{{ $reservation->reservation_date }}</td>
-                    <td>{{ $reservation->status }}</td>
+                    <td
+                        class="{{ $reservation->status == 'pending' ? 'text-yellow-600' : ($reservation->status == 'canceled' ? 'text-red-500' : 'text-green-500') }}">
+                        {{ $reservation->status }}</td>
                     <td>{{ $reservation->user->name }}</td>
                     <td>{{ $reservation->schedule->field->name }}</td>
                     <td>{{ $reservation->schedule->day }}</td>
@@ -43,7 +45,7 @@
                         <form action="/reservations/{{ $reservation->id }}" method="POST" class="inline">
                             @csrf
                             @method("DELETE")
-                            <button type="submit" class="btn btn-error">Batal</button>
+                            <button type="submit" class="btn btn-error" onclick="return confirm('Apa anda yakin?')">Batal</button>
                         </form>
                         @endif
                         @endif

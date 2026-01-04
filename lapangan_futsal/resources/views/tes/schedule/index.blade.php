@@ -33,7 +33,7 @@
                     <td>{{ $schedule->end_time }}</td>
                     <td>{{ $schedule->field->name }}</td>
                     <td>{{ $schedule->field->type }}</td>
-                    <td>{{ $schedule->field->price_per_hour }}</td>
+                    <td>{{ Number::currency($schedule->field->price_per_hour, in: 'IDR', locale: 'id-ID') }}</td>
                     <td class="{{ $schedule->status == 'available' ? 'text-success' : 'text-error' }}">{{
                         $schedule->status }}</td>
                     <td>
@@ -42,7 +42,8 @@
                         <form action="/schedules/{{ $schedule->id }}" method="POST" class="inline">
                             @csrf
                             @method("DELETE")
-                            <button type="submit" class="btn btn-error">Delete</button>
+                            <button type="submit" class="btn btn-error"
+                                onclick="return confirm('Apa kamu yakin?')">Delete</button>
                         </form>
                         @endif
                         @if (auth()->user()->hasRole('user'))

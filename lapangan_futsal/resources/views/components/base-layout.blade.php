@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-base-200 min-h-screen">
-    <div class="drawer sticky top-0 ">
+    <div class="drawer sticky top-0 z-50">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
             <nav class="navbar bg-base-100 shadow-sm">

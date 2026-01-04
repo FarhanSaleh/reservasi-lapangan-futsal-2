@@ -34,7 +34,8 @@
                         <form action="/users/{{ $user->id }}" method="POST" class="inline">
                             @csrf
                             @method("DELETE")
-                            <button type="submit" class="btn btn-error">Delete</button>
+                            <button type="submit" class="btn btn-error"
+                                onclick="return confirm('Apa kamu yakin?')">Delete</button>
                         </form>
                     </td>
                 </tr>

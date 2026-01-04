@@ -12,7 +12,7 @@
     <form action="/profile" method="POST" class="space-y-4">
         @csrf
         @method("PUT")
-        <div class="">
+        <div>
             <fieldset class="fieldset ">
                 <legend class="fieldset-legend">Nama</legend>
                 <input type="text" class="input w-full" placeholder="Nama" name="name" value="{{ $user->name }}" />

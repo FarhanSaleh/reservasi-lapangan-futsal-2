@@ -18,6 +18,7 @@ class FieldController extends Controller
     public function index()
     {
         $fields = Field::all();
+        // $pricePerHour = Number::currency($reservation->schedule->field->price_per_hour, in: 'IDR',  locale: 'id-ID');
         return view('tes.field.index', ['fields' => $fields]);
     }
 
@@ -48,7 +49,7 @@ class FieldController extends Controller
             'price_per_hour' => $request->price_per_hour,
         ]);
         catat_log('create', 'Membuat lapangan baru');
-        return redirect("/fields");
+        return redirect("/fields")->with('success', 'Lapangan berhasil ditambahkan');
     }
     /**
      * Display the specified resource.
@@ -87,7 +88,7 @@ class FieldController extends Controller
             'price_per_hour' => $request->price_per_hour,
         ]);
         catat_log('update', 'Mengubah lapangan');
-        return redirect("/fields");
+        return redirect("/fields")->with('success', 'Lapangan berhasil diperbarui');
     }
 
     /**
@@ -98,6 +99,6 @@ class FieldController extends Controller
         $field = Field::findOrFail($id);
         $field->delete();
         catat_log('delete', 'Menghapus lapangan');
-        return redirect('/fields');
+        return redirect('/fields')->with('success', 'Lapangan berhasil dihapus');
     }
 }

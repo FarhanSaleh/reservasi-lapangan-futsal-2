@@ -28,14 +28,15 @@
                 <tr>
                     <td>{{ $field->name }}</td>
                     <td>{{ $field->type }}</td>
-                    <td>{{ $field->price_per_hour }}</td>
+                    <td>{{ Number::currency($field->price_per_hour, in: 'IDR', locale: 'id-ID') }}</td>
                     @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pengelola'))
                     <td>
                         <a href="/fields/{{ $field->id }}/edit" class="btn btn-warning">Edit</a>
                         <form action="/fields/{{ $field->id }}" method="POST" class="inline">
                             @csrf
                             @method("DELETE")
-                            <button type="submit" class="btn btn-error">Delete</button>
+                            <button type="submit" class="btn btn-error"
+                                onclick="return confirm('Apa kamu yakin?')">Delete</button>
                         </form>
                     </td>
                     @endif
